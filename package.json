@@ -1,28 +1,32 @@
 {
   "name": "gifster",
   "version": "1.0.0",
-  "description": "GIF chatting application",
+  "description": "gifster backend part",
   "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "request": "^2.72.0",
+    "http": "^0.0.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.17"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msalihguler/gifmessenger.git"
+    "url": "git+https://github.com/msalihguler/gifster_backend.git"
   },
   "keywords": [
-    "gif",
-    "chat"
+    "backend",
+    "node.js",
+    "gifster"
   ],
-  "author": "Muhammed Salih GÜLER",
-  "license": "MIT",
+  "author": "Muhammed Salih Güler",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/msalihguler/gifmessenger/issues"
+    "url": "https://github.com/msalihguler/gifster_backend/issues"
   },
-  "homepage": "https://github.com/msalihguler/gifmessenger#readme",
-  "dependencies": {
-    "body-parser": "^1.15.1",
-    "express": "^4.13.4",
-    "request": "^2.72.0"
-  }
+  "homepage": "https://github.com/msalihguler/gifster_backend#readme"
 }
