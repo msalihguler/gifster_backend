@@ -528,6 +528,6 @@ app.get("/getreveals",function(req,res){
     });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(process.env.PORT || 5000, function(){
+  console.log('listening on *:5000');
 });
