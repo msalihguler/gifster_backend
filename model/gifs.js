@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/gifster');
+mongoose.connect('mongodb://gifster:gifster@ds021434.mlab.com:21434/gifster');
 
 var mongoSchema =   mongoose.Schema;
 
