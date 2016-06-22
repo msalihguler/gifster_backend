@@ -109,7 +109,7 @@ app.post("/registeruser",function(req,res){
     var long = req.query.long;
     var token = req.query.token;
     var gender = req.query.gender;
-
+    console.log(gender);
     users.findOne({"userid":person_id},function(err,data){
         if(err){
           response = {"error" : true,"message" : "Error fetching data"};
@@ -133,7 +133,7 @@ app.post("/registeruser",function(req,res){
            db.likes = "[]";
            db.dislikes = "[]";
            db.matches = "[]";
-           data.gender = gender;
+           db.gender = gender;
            db.token = token;
            db.save(function(err,user){
               if(err) {
