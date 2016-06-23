@@ -440,13 +440,17 @@ app.get("/revealprofile",function(req,res){
     var pic_link = req.query.pic_link;
     var id = req.query.id;
     var r_id = req.query.o_id;
+    console.log("başta");
     var response = {};
     reveals.findOne({"userid":r_id},function(error,data){
            if(error){
             response = {"error" : true,"message" : "Error fetching data"};
             res.send(JSON.stringify(response));
            }else{
+             console.log("elsete");
+
                 if(data){
+                  console.log("datada");
                     var profile_array = JSON.parse(data.revealed_profiles);
                     var single_array = {"name":name,"link":link,"pic_link":pic_link};
                     if(!(data.revealed_profiles.indexOf(single_array)>-1)){
@@ -477,6 +481,7 @@ app.get("/revealprofile",function(req,res){
                     });
                     }
                 }else{
+                  console.log("yeni nesne");
                     var db = new reveals();
                     db.userid = r_id;
                     var profile_array = [];
