@@ -438,7 +438,7 @@ app.get("/sendmyprofile",function(req,res){
     var name = req.query.name;
     var id = req.query.id;
     var link = "https://www.facebook.com/app_scoped_user_id/" + id;
-    var pic_link = "https://graph.facebook.com/"+id+"?fields=picture.width(480).height(480)";
+    var pic_link ="https://graph.facebook.com/"+id+"/picture?type=large";
     var r_id = req.query.o_id;
     console.log("başta");
     var response = {};
