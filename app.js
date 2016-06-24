@@ -434,10 +434,10 @@ app.get("/sendlikestatus",function(req,res){
     });
     }
 });
-app.get("/revealprofile",function(req,res){
+app.get("/sendmyprofile",function(req,res){
     var name = req.query.name;
-    var link = req.query.url;
-    var pic_link = req.query.pic_link;
+    var link = req.body.url;
+    var pic_link = req.body.pic_link;
     var id = req.query.id;
     var r_id = req.query.o_id;
     console.log("başta");
