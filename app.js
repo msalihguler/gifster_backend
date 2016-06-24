@@ -435,11 +435,11 @@ app.get("/sendlikestatus",function(req,res){
     }
 });
 app.get("/sendmyprofile",function(req,res){
-    var name = req.body.name;
-    var link = req.body.url;
-    var pic_link = req.body.pic_link;
-    var id = req.body.id;
-    var r_id = req.body.o_id;
+    var name = req.query.name;
+    var id = req.query.id;
+    var link = "https://www.facebook.com/app_scoped_user_id/" + id;
+    var pic_link = "https://graph.facebook.com/"+id+"?fields=picture.width(480).height(480)";
+    var r_id = req.query.o_id;
     console.log("başta");
     var response = {};
     reveals.findOne({"userid":r_id},function(error,data){
