@@ -549,7 +549,8 @@ app.get("/deletetoken",function(req,res){
             if(err) {
               response = {"error" : true,"message" : "Error adding data"};
               } else {
-              response = {"error" : false,"message" : "Location updated: " +user.location};
+				console.log("token silindi");
+              response = {"error" : false,"message" : "Location updated: "};
               }
               res.send(JSON.stringify(response));
               });
