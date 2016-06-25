@@ -544,8 +544,8 @@ app.get("/deletetoken",function(req,res){
         res.send(JSON.stringify(response));
         }else{
            if(d){
-            data.token = "";
-            data.save(function(err,user){
+            d.token = "";
+            d.save(function(err,user){
             if(err) {
               response = {"error" : true,"message" : "Error adding data"};
               } else {
