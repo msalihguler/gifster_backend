@@ -535,7 +535,28 @@ app.get("/getreveals",function(req,res){
         }
     });
 });
-
+app.get("/deletetoken",function(req,res){
+    var id = req.query.id;
+    var response = {};
+    users.findOne({"userid":id},function(e,d){
+        if(e){
+        response = {"error" : true,"message" : "Error while fetching data"};
+        res.send(JSON.stringify(response));
+        }else{
+           if(d){
+            data.token = "";
+            data.save(function(err,user){
+            if(err) {
+              response = {"error" : true,"message" : "Error adding data"};
+              } else {
+              response = {"error" : false,"message" : "Location updated: " +user.location};
+              }
+              res.send(JSON.stringify(response));
+              });
+          }
+        }
+    });
+});
 http.listen(process.env.PORT || 5000, function(){
   console.log('listening on *:5000');
 });
