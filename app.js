@@ -409,7 +409,7 @@ app.get("/sendlikestatus",function(req,res){
                          response = {"match" : false,"message" : "Error adding data"};
                       } else {
                         if(match==true){
-							var lang = d.language;
+							var lang = data.language;
 								 var msg = "";
 								 if(lang=="tr"){
 									 msg="Bir eşleşmemiz var!";
