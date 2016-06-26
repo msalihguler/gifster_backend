@@ -110,7 +110,7 @@ app.post("/registeruser",function(req,res){
     var token = req.query.token;
     var gender = req.query.gender;
 	var language = req.query.lang;
-    console.log(gender);
+    console.log(language);
     users.findOne({"userid":person_id},function(err,data){
         if(err){
           response = {"error" : true,"message" : "Error fetching data"};
@@ -317,6 +317,15 @@ app.get("/sendmessage",function(req,res){
            }else{
               users.findOne({"userid":r_id},function(err,dat){
               console.log(data);
+			  var notificationmessage = "";
+			  var language = dat.language;
+			  if(language=="tr"){
+				  notificationmessage = "Yeni mesajınız var!";
+			  }else if(language == "es"){
+				  notificationmessage = "Tienes un mensaje!";
+			  }else {
+				  notificationmessage = "You have a message!";
+			  }
               request({
                  url: "https://fcm.googleapis.com/fcm/send",
                  method: "POST",
@@ -324,7 +333,7 @@ app.get("/sendmessage",function(req,res){
                      "Content-Type": "application/json",
                       'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                  },
-                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : \"You have a message!\",\"title\" : \"GIFster\"},\"data\":{\"message\":"+JSON.stringify(data)+"}}"
+                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"},\"data\":{\"message\":"+JSON.stringify(data)+"}}"
 
                  }, function (error, response, body){
                      console.log(body);
@@ -362,6 +371,15 @@ app.get("/sendlikestatus",function(req,res){
                          var tempMatches = JSON.parse(d.matches);
                          tempMatches.push(o_id);
                          d.matches = JSON.stringify(tempMatches);
+						 var notificationmessage = "";
+						  var language = d.language;
+						  if(language=="tr"){
+							  notificationmessage = "Yeni eşleşmeniz var!";
+						  }else if(language == "es"){
+							  notificationmessage = "Tienes un partido!";
+						  }else {
+							  notificationmessage = "You have a match!";
+						  }
                          data.save(function(e,c){
                            if(err) {}
                            else {
@@ -373,7 +391,7 @@ app.get("/sendlikestatus",function(req,res){
                                 "Content-Type": "application/json",
                                  'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                             },
-                            body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : \"You have a match!\",\"title\" : \"GIFster\"}}"
+                            body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
 
                             }, function (error, response, body){
                                 console.log(body);
@@ -386,6 +404,15 @@ app.get("/sendlikestatus",function(req,res){
                       var templikes = JSON.parse(d.likes);
                       templikes.push(o_id);
                       d.likes = JSON.stringify(templikes);
+					  var notificationmessage = "";
+						  var language = d.language;
+						  if(language=="tr"){
+							  notificationmessage = "Yeni eşleşmeniz var!";
+						  }else if(language == "es"){
+							  notificationmessage = "Tienes un partido!";
+						  }else {
+							  notificationmessage = "You have a match!";
+						  }
                       d.save(function(err,user){
                       if(err) {
                          response = {"match" : false,"message" : "Error adding data"};
@@ -398,7 +425,7 @@ app.get("/sendlikestatus",function(req,res){
                                     "Content-Type": "application/json",
                                     'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                                 },
-                                body: "{\"to\" : \""+data.token+"\",\"notification\" : {\"body\" : \"You have a match!\",\"title\" : \"GIFster\"}}"
+                                 body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
 
                                 }, function (error, response, body){
                                     console.log(body);
@@ -456,30 +483,40 @@ app.get("/sendmyprofile",function(req,res){
                   console.log("datada");
                     var profile_array = JSON.parse(data.revealed_profiles);
                     var single_array = {"name":name,"link":link,"pic_link":pic_link};
-                    if(!(data.revealed_profiles.indexOf(single_array)>-1)){
+                    if(!(profile_array.indexOf(JSON.stringify(single_array))>-1)){
                     profile_array.push(JSON.stringify(single_array));
                     data.save(function(e,d){
                     if(e){
                       response = {"error" : true,"message" : "Error while saving data"};
                       res.send(JSON.stringify(response));
                     }else{
-                        if(d){
-                          request({
-                             url: "https://fcm.googleapis.com/fcm/send",
-                             method: "POST",
-                             headers: {
-                                 "Content-Type": "application/json",
-                                 'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
-                             },
-                             body: "{\"to\" : \""+data.token+"\",\"notification\" : {\"body\" : \"Someone revealed a profile to you!\",\"title\" : \"GIFster\"}}"
+                    if(d){
+						 users.findOne({"userid":r_id},function(err,dat){
+							 var notificationmessage = "";
+							  var language = dat.language;
+							  if(language=="tr"){
+								  notificationmessage = "Birisi seninle profilini paylaştı!";
+							  }else if(language == "es"){
+								  notificationmessage = "Alguien reveló un perfil!";
+							  }else {
+								  notificationmessage = "Someone revealed a profile to you!";
+							  }
+						  request({
+							 url: "https://fcm.googleapis.com/fcm/send",
+							 method: "POST",
+							 headers: {
+								 "Content-Type": "application/json",
+								  'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
+							 },
+							 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
 
-                             }, function (error, response, body){
-                                 console.log(body);
-                             });
-
-                        response = {"error" : false,"message" : "success"};
-                        res.send(JSON.stringify(response));
-                        }
+							 }, function (error, response, body){
+								 console.log(body);
+							 });
+						  });
+							response = {"error" : false,"message" : "success"};
+							res.send(JSON.stringify(response));
+						}
                     }
                     });
                     }
@@ -498,6 +535,15 @@ app.get("/sendmyprofile",function(req,res){
                         }else{
                             if(d){
                              users.findOne({"userid":r_id},function(err,dat){
+								 var notificationmessage = "";
+								  var language = dat.language;
+								  if(language=="tr"){
+									  notificationmessage = "Birisi seninle profilini paylaştı!";
+								  }else if(language == "es"){
+									  notificationmessage = "Alguien reveló un perfil!";
+								  }else {
+									  notificationmessage = "Someone revealed a profile to you!";
+								  }
                               request({
                                  url: "https://fcm.googleapis.com/fcm/send",
                                  method: "POST",
@@ -505,7 +551,7 @@ app.get("/sendmyprofile",function(req,res){
                                      "Content-Type": "application/json",
                                       'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                                  },
-                                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : \"Someone revealed a profile to you!\",\"title\" : \"GIFster\"}}"
+                                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" :"+notificationmessage+",\"title\" : \"GIFster\"}}"
 
                                  }, function (error, response, body){
                                      console.log(body);
