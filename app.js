@@ -333,8 +333,7 @@ app.get("/sendmessage",function(req,res){
                      "Content-Type": "application/json",
                       'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                  },
-                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : \""+msg+"\",\"title\" : \"GIFster\"},\"data\":{\"message\":"+JSON.stringify(data)+"}}"
-
+				 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : \""+msg+"\",\"title\" : \"GIFster\"}}"
                  }, function (error, response, body){
                      console.log(body);
                  });
