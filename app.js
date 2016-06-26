@@ -333,7 +333,7 @@ app.get("/sendmessage",function(req,res){
                      "Content-Type": "application/json",
                       'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                  },
-                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"},\"data\":{\"message\":"+JSON.stringify(data)+"}}"
+                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : \""+notificationmessage+"\",\"title\" : \"GIFster\"},\"data\":{\"message\":"+JSON.stringify(data)+"}}"
 
                  }, function (error, response, body){
                      console.log(body);
@@ -391,7 +391,7 @@ app.get("/sendlikestatus",function(req,res){
                                 "Content-Type": "application/json",
                                  'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                             },
-                            body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
+                            body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : \""+notificationmessage+"\",\"title\" : \"GIFster\"}}"
 
                             }, function (error, response, body){
                                 console.log(body);
@@ -425,7 +425,7 @@ app.get("/sendlikestatus",function(req,res){
                                     "Content-Type": "application/json",
                                     'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                                 },
-                                 body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
+                                 body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : \""+notificationmessage+"\",\"title\" : \"GIFster\"}}"
 
                                 }, function (error, response, body){
                                     console.log(body);
@@ -508,7 +508,7 @@ app.get("/sendmyprofile",function(req,res){
 								 "Content-Type": "application/json",
 								  'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
 							 },
-							 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" : "+notificationmessage+",\"title\" : \"GIFster\"}}"
+							 body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : \""+notificationmessage+"\",\"title\" : \"GIFster\"}}"
 
 							 }, function (error, response, body){
 								 console.log(body);
@@ -551,7 +551,7 @@ app.get("/sendmyprofile",function(req,res){
                                      "Content-Type": "application/json",
                                       'Authorization': "key=AIzaSyAuAr4BrpBVlpQYZMgoUfI-nmF8FIfi5MU"
                                  },
-                                 body: "{\"to\" : \""+dat.token+"\",\"notification\" : {\"body\" :"+notificationmessage+",\"title\" : \"GIFster\"}}"
+                                 body: "{\"to\" : \""+d.token+"\",\"notification\" : {\"body\" : \""+notificationmessage+"\",\"title\" : \"GIFster\"}}"
 
                                  }, function (error, response, body){
                                      console.log(body);
