@@ -109,6 +109,7 @@ app.post("/registeruser",function(req,res){
     var long = req.query.long;
     var token = req.query.token;
     var gender = req.query.gender;
+	var language = req.query.lang;
     console.log(gender);
     users.findOne({"userid":person_id},function(err,data){
         if(err){
@@ -118,6 +119,7 @@ app.post("/registeruser",function(req,res){
           if(data){
             data.location = lat+"-"+long;
             data.token = token;
+			data.language = language;
             data.save(function(err,user){
             if(err) {
               response = {"error" : true,"message" : "Error adding data"};
@@ -135,6 +137,7 @@ app.post("/registeruser",function(req,res){
            db.matches = "[]";
            db.gender = gender;
            db.token = token;
+		   db.language =language;
            db.save(function(err,user){
               if(err) {
                   response = {"error" : true,"message" : "Error adding data"};
